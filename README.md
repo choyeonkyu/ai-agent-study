@@ -36,9 +36,12 @@
 - 3.4.1 [PromptTemplate ](3.4.1.PromptTemplate.py)
 - 3.4.2 [OutputParser](3.4.2.OutputParser.py)
 - 3.5 [Runnable과 LCEL](3.5.RunnableLCEL.py)
-- 3.6 도구
-- 3.7 임베딩과 벡터 스토어
-- 3.8 리트리버와 RAG
+- 3.6 [도구](3.6.tool-decorator.py)
+- 3.7.1 [임베딩 모델](3.7.1.embedding.py)
+- 3.7.2 [벡터 DB](3.7.2.vectorDB.py)
+- 3.7.3 [벡터 DB with document loader](3.7.3.%20vectorDB-with-document-loader.py)
+- 3.8.1 [Retriever](3.8.1.retriever-from-vectordb.py)
+- 3.8.2 [websearch RAG 모델](3.8.2.websearch-RAG.py)
 
 ---
 
