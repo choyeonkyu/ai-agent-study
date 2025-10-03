@@ -1,6 +1,7 @@
 # 요즘 AI 에이전트 개발 Study
 
 > LLM, RAG, ADK, MDP, LangChain, A2A, LangGraph 실습용 예제 코드 저장소
+![alt text](https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791194383413.jpg)
 
 ---
 
@@ -86,14 +87,65 @@
 ### Chapter 07 AI 에이전트 프로토콜, 클로드 MCP
 - 7.1 MCP 탄생 배경
 - 7.2 MCP란?
-- 7.3 MCP 기술적 관점
+    * 호스트: 사용자가 직접 상호작용 하는 애플리케이션 (ex. Claude Desktop)
+    * 클라이언트: 호스트 애플리케이션 내에 존재하는 코드
+    * 서버: 도구, 리소스, 프롬프트를 제공.
+![alt text](https://huggingface.co/datasets/mcp-course/images/resolve/main/unit1/4.png)
+- 7.3 MCP 기술적 관점 (JSON-RPC 2.0 기반)
+```TypeScript
+interface JsonRPCMessage{
+    jsonrpc: "2.0";
+    id?: string | number; // 요청/응답 식별자
+    method?: string; // 메서드 이름
+    params?: object; // 매개변수
+    result?: object; // 응답 결과
+    error?: {
+        code: number;
+        message: string;
+        data?: unknown;
+    };
+}
+```
 - 7.4 MCP 현재 위상
-- 7.5 MCP 서버 만들기
-- 7.6 향후 과제
+- 7.5 [MCP 서버 만들기](7.5.hello-mcp-server.py)
+```Python
+@mcp.tool() # 도구를 정의: LLM이 실행할 수 있는 함수를 의미
+@mcp.resource() # 리소스를 정의: LLM이 접근할 수 있는 데이터를 의미
+@mcp.prompt() # 프롬프트를 정의: 재사용이 가능한 템플릿을 의미
+```
+- 7.6 [MCP 클라이언트 만들기](7.6.hello-mcp-client.py)
 
 ### Chapter 08 AI 에이전트 프로토콜, 구글 A2A
-- 8.1 A2A란?
+- 8.1 A2A란? 
+    * 다른 곳에서 만든 AI 에이전트를 SaaS형태로 사용 할 수 있다면?
+    * 물리적으로 분산된 환경에서도 다중 에이전트가 협업할 수 있어야 한다.
 - 8.2 핵심 개념 및 용어
+    - 8.2.1 에이전트 카드: 에이전트를 찾을 수 있게 해주는 JSON 데이터 문서. A2A 서버를 설명하며, `.well-known/agent.json` 경로에 위치. 에이전트의 이름, 서비스의 엔드포인트 URL, 버전, 지원되는 A2A의 기능, 기본 입출력 방식, 인증 요구사항 등 포함.
+    - 8.2.2 태스크: A2A 서버에서 처리되는 작업의 단위
+    ```TypeScript
+    export interface TaskStatus { // submitted, working, input-required, completed, canceled 등
+        state: TaskState;
+        message?: Message;
+        timestamp?: string;
+    }
+    ```
+    - 8.2.3 메시지: 클라이언트와 에이전트 간의 의사소통 단위 
+    ```TypeScript
+    export interface Message {
+        role: "user" | "agent"; // 메시지를 보낸 주체
+        parts: Part[]; // 텍스트, 이미지 등 다양한 데이터 구조를 가질 수 있음 (TextPart, FilePart, DataPart)
+        metadata?: {
+            [key:string]: any;
+        };
+        extensions?: string[];
+        referenceTaskIds?: string[];
+        messageId: string;
+        taskId?: string;
+        contextId?: string;
+        kind: "message";
+    }
+    ```
+    - 8.2.4 아티팩트: 원격 에이전트가 생성한 작업 결과물 
 - 8.3 MCP와 A2A 비교
 - 8.4 동작 원리 실습 : AI 비서 서버 & 클라이언트
 
