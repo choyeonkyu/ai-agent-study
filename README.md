@@ -74,10 +74,10 @@
 - 6.4 [조건부 라우팅 : 감정 분석 챗봇](6.4.sentiment-analysis-chatbot.py)
 - 6.5 [체크포인터 상태 관리](6.5.checkpoint-langgraph.py)
 - 6.6 [루프 워크플로 구현](6.6.loop-workflow.py)
-- 6.7 병렬 처리 워크플로
-- 6.8 ToolNode를 활용한 도구 기능
-- 6.9 휴먼 인 더 루프 반영
-- 6.10 하위 그래프 사용
+- 6.7 [병렬 처리 워크플로](6.7.parallel_execution.py)
+- 6.8 [ToolNode를 활용한 도구 기능](6.8.tool-langgraph.py)
+- 6.9 [휴먼 인 더 루프 반영](6.9.human-in-loop.py)
+- 6.10 [하위 그래프 사용](6.10.weather-subgraph.py)
 
 ---
 
