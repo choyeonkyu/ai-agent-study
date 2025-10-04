@@ -1,6 +1,7 @@
 # 요즘 AI 에이전트 개발 Study
 
 > LLM, RAG, ADK, MDP, LangChain, A2A, LangGraph 실습용 예제 코드 저장소
+
 ![alt text](https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791194383413.jpg)
 
 ---
@@ -148,6 +149,11 @@ interface JsonRPCMessage{
     - 8.2.4 아티팩트: 원격 에이전트가 생성한 작업 결과물 
 - 8.3 MCP와 A2A 비교
 - 8.4 동작 원리 실습 : AI 비서 서버 & 클라이언트
+    * 8.4.1 [Agent server](8.4.1.a2a-server.py)
+    * 8.4.2 [Agent Executor](agent_executor.py)
+    * 8.4.3 HTTP Handler
+    * 8.4.4 A2A Inspector
+    * 8.4.5 [A2A Client](8.4.4.a2a-client.py)
 
 ---
 
